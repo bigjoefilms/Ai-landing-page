@@ -6,6 +6,7 @@ import quantumLogo from "@/assets/logo-quantum.png"
 import pulseLogo from "@/assets/logo-pulse.png"
 import echoLogo from "@/assets/logo-echo.png"
 import {motion} from "framer-motion"
+import Image from 'next/image';
 
 
 export const LogoTicker = () => {
@@ -34,7 +35,10 @@ export const LogoTicker = () => {
               [acmeLogo,pulseLogo,echoLogo,celestialLogo,apexLogo,quantumLogo,
                 acmeLogo,pulseLogo,echoLogo,celestialLogo,apexLogo,quantumLogo
               ].map((logo) => (
-                <img src={logo.src} key={logo.src} className="h-6 w-auto" />
+                <Image src={logo.src} alt="Logo" key={logo.src} className="h-6 w-auto"
+                width={500} // Specify width
+    height={300}
+                />
               ))
             }
             </motion.div>

@@ -3,31 +3,33 @@ import { Button } from "@/app/components/Button";
 import starBg from "@/assets/stars.png";
 import gridLines from "@/assets/grid-lines.png";
 import {motion ,useMotionTemplate,useMotionValue,useScroll, useTransform } from 'framer-motion'
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef,useCallback  } from "react";
 
 const useRelativeMousePosition = (to: RefObject<HTMLElement>) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  const updateMousePosition = useCallback(
+    (event: MouseEvent) => {
+      if (!to.current) return;
+      const { top, left } = to.current.getBoundingClientRect();
+      mouseX.set(event.x - left);
+      mouseY.set(event.y - top);
+    },
+    [to, mouseX, mouseY] // Dependencies for useCallback
+  );
 
-   const updateMousePosition = (event: MouseEvent) =>{
-    if (!to.current) return;
-    const {top, left} = to.current?.getBoundingClientRect()
-    mouseX.set(event.x - left);
-    mouseY.set(event.y - top);
-
-   }
   useEffect(() => {
-  window.addEventListener('mousemove',updateMousePosition);
+    window.addEventListener("mousemove", updateMousePosition);
 
-  return ()=>{
-    window.removeEventListener('mousemove',updateMousePosition);
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+    };
+  }, [updateMousePosition]); // Dependency array includes updateMousePosition
 
-  }
-  }, [updateMousePosition]);
+  return [mouseX, mouseY];
+};
 
-   return [mouseX,mouseY];
-}
 
 
 export const CallToAction = () => {

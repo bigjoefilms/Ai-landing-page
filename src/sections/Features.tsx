@@ -1,11 +1,10 @@
 "use client"
 import { DotLottieCommonPlayer, DotLottiePlayer } from "@dotlottie/react-player";
 import productImage from "@/assets/product-image.png"
-import Image from "next/image";
 import {  ComponentPropsWithoutRef, useEffect, useRef, useState } from "react";
 import {motion, animate, ValueAnimationTransition, useScroll, easeInOut} from 'framer-motion'
 import { useMotionTemplate, useMotionValue } from "framer-motion";
-import { linea } from "@reown/appkit/networks";
+
 
 const tabs = [
   {

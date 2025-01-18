@@ -63,7 +63,7 @@ const FeatureTab = (props: typeof tabs[number] & ComponentPropsWithoutRef<'div'>
   animate(yPercentage, [0, 0, 100, 100, 0], options)
    
   
-  }, [xPercentage, yPercentage]);
+  }, [props.selected , xPercentage, yPercentage]);
   
   const handleTabHover = () => {
     if (dotLottieRef.current === null ) return
